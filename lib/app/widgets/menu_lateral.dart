@@ -1,5 +1,8 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../data/repository/local_file.dart';
 import '../modules/home_module/home_controller.dart';
 import '../routes/app_pages.dart';
 
@@ -17,19 +20,16 @@ class _CreaMenuLateralState extends State<CreaMenuLateral> {
     final w = MediaQuery.of(context).size.width;
     final h = MediaQuery.of(context).size.height;
     return FutureBuilder(
-      future:widget.controller.getCities(),
-      builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
+      future:widget.controller.getCitiesLocal(),
+      builder: (BuildContext context, AsyncSnapshot<Map<String,Uint8List>> snapshot) {
         if(snapshot.hasData && !snapshot.hasError){
-          print(snapshot.data);
           return Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                ...snapshot.data!.map((e) {
-                  final city = e.replaceFirst("assets/", "").replaceFirst("/", "");
-                  print("------------------------------------------->"+city);
-                  return InkWell(
+                ...snapshot.data!.keys.map((city) {
+                return InkWell(
                     onTap: () {
-                      Get.toNamed(Routes.CITY, arguments: e);
+                      Get.toNamed(Routes.CITY, arguments: city);
                     },
                     child: Stack(alignment: Alignment.center, children: [
                       Padding(
@@ -39,10 +39,7 @@ class _CreaMenuLateralState extends State<CreaMenuLateral> {
                           child: Container(
                             width: w * 0.50,
                             height: h * 0.15,
-                            child: Image.asset(
-                              e + "icon.jpg",
-                              fit: BoxFit.cover,
-                            ),
+                            child:Image.memory(snapshot.data![city]!,fit:BoxFit.cover),
                           ),
                         ),
                       ),

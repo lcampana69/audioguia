@@ -10,19 +10,20 @@ import 'package:audio_guia/app/modules/city_module/city_controller.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shimmer/shimmer.dart';
 
-
+//***************************************************************************
 import '../../data/models/city_model.dart';
 
+
+//***************************************************************************
 class CityPage extends GetView<CityController> {
   @override
   Widget build(BuildContext context) {
     final w = context.mediaQuerySize.width;
     final h = context.mediaQuerySize.height;
-    final e = Get.arguments;
+    final city = Get.arguments;
     final color=Colors.lightBlue;
     final w5=w/67;
     final h5=h/144;
-    final city = e.replaceFirst("assets/", "").replaceFirst("/", "");
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -111,6 +112,7 @@ class CityPage extends GetView<CityController> {
         ));
   }
 
+  //***************************************************************************
   List<DropdownMenuItem<String>> _buildList(int cant,Color color) {
     return List.generate(cant, (index) {
                     final titulo=controller.getNamePoiInt(index).trim();
@@ -145,7 +147,7 @@ class CityPage extends GetView<CityController> {
                         value: index.toString());
                   });
   }
-
+  //***************************************************************************
   Widget GoogleMapsActive(double h, double w) {
     return Container(
         height: h,

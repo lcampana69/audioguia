@@ -33,7 +33,7 @@ class Splash extends StatelessWidget {
                     animateController.reverse();
                     break;
                   case AnimationStatus.dismissed:
-                    Get.offAllNamed(Routes.HOME);
+                    Get.offAllNamed(Routes.LOGIN);
                     break;
                 }
               });

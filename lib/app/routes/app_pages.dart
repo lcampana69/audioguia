@@ -24,16 +24,19 @@ abstract class AppPages {
       name: Routes.HOME,
       page: () => HomePage(),
       binding: HomeBinding(),
+      transition: Transition.fade,
+      transitionDuration: Duration(milliseconds: 1000)
     ),
     GetPage(
       name: Routes.SPLASH,
       page: () => Splash(),
-
     ),
     GetPage(
       name: Routes.LOGIN,
       page: () => loginPage(),
       binding: loginBinding(),
+      transition: Transition.fadeIn,
+      transitionDuration: Duration(milliseconds: 1500)
     ),
   ];
 }

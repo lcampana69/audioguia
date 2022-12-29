@@ -39,8 +39,9 @@ dependencies:
   animate_do: ^3.0.2
   flutter_launcher_icons: ^0.11.0
   shimmer: ^2.0.0
-  appwrite: ^8.1.0
+  appwrite: ^8.2.0
   path_provider: ^2.0.11
+  shared_preferences: ^2.0.15
   intl:
 
 

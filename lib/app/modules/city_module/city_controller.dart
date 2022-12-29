@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:audioplayers/audioplayers.dart';
@@ -10,6 +9,7 @@ import 'package:location/location.dart';
 
 import '../../data/models/city_model.dart';
 import '../../data/provider/city_provider.dart';
+import '../../data/repository/local_file.dart';
 
 class CityController extends GetxController {
   late CityModel city;
@@ -57,9 +57,9 @@ class CityController extends GetxController {
 
 //********************************************************************************
   Future<void> playMp3(String audio) async {
-    final mp3='assets/'+city.name+'/audio/'+audio+'.mp3';
-    ByteData bytes = await rootBundle.load(mp3);
-    final bs=BytesSource(bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes));
+    final mp3=city.name+'/'+audio+'.mp3';
+    final bytes=await LocalFile.loadFile(mp3);
+    final bs=BytesSource(bytes!);
     await player.play(bs
     );
   }
